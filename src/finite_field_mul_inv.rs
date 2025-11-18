@@ -6,8 +6,8 @@
 pub mod finite_field_mul_inv;
 use finite_field_mul_inv::*;
 fn main(){
-    let mul = 7;
-    let p = 13;
+    let mul = 8;
+    let p = 11;
     let res = eea_inv(mul, p);
     println!("res is {:?}", res);
 }
