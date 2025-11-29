@@ -1,6 +1,7 @@
 //! Feldman's Verifiable Secret Sharing
-
-use std::ops::{Add, Mul};
+//! Uses C = g^a_0, g^a_1, ... as commitments
+//! Verifies share y = P(i) = a_0 + a_1*i + a_2*i^2 + ... + a_n*i^n
+//! 
 
 // --- Mocking the Cryptographic Group (e.g., Elliptic Curve Point) ---
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -12,7 +13,7 @@ struct Scalar(u128);       // "x" (The private data)
 const MODULUS: u128 = 1009; // Order of the group
 
 impl GroupElement {
-    // Simulating g^scalar
+    /// Simulating g^scalar
     fn generator_pow(s: Scalar) -> Self {
         // Just a mock modular exponentiation for logic demonstration
         // g = 5
@@ -27,12 +28,12 @@ impl GroupElement {
         GroupElement(res)
     }
 
-    // Group Operation (Point Addition corresponds to mult in modular groups)
+    /// Group Operation (Point Addition corresponds to mult in modular groups)
     fn combine(&self, other: Self) -> Self {
         GroupElement((self.0 * other.0) % MODULUS)
     }
     
-    // Scalar Multiplication (g^a)^b = g^{ab}
+    /// Scalar Multiplication (g^a)^b = g^{ab}
     fn scalar_mul(&self, scalar: u128) -> Self {
         let mut base = self.0;
         let mut exp = scalar;
@@ -76,7 +77,7 @@ fn verify_share(index: u128, share: Scalar, commitments: &[GroupElement]) -> boo
     lhs == rhs
 }
 
-fn main() {
+pub fn entry_point() {
     println!("--- Feldman VSS Simulation ---");
     
     // Scenario: P(x) = 5 + 2x

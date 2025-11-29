@@ -1,7 +1,6 @@
-mod flt_eea;
-use flt_eea::*;
+mod dkg_fiat_shamir;
+use dkg_fiat_shamir::commit_reveal_pok;
 
 fn main() {
-    extended_euclidean_algo::entry_point();
-    fermat_little_theorem::entry_point();
+    commit_reveal_pok::entry_point();
 }
