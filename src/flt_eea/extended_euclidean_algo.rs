@@ -1,23 +1,10 @@
-// Standard "BigInt" style arithmetic for demonstration.
-// In production, use `crypto-bigint` or `num-bigint`.
-
-fn mod_pow(mut base: i128, mut exp: i128, modulus: i128) -> i128 {
-    if modulus == 1 { return 0; }
-    let mut result = 1;
-    base = base % modulus;
-    while exp > 0 {
-        if exp % 2 == 1 {
-            result = (result * base) % modulus;
-        }
-        exp = exp >> 1;
-        base = (base * base) % modulus;
-    }
-    result
-}
-
+//! Standard "BigInt" style arithmetic for demonstration.
+//! In production, use `crypto-bigint` or `num-bigint`.
 
 /// 2. Extended Euclidean Algorithm Inverse
-/// WORKS FOR: Any `m` where gcd(a, m) == 1
+/// WORKS FOR: Any `m` where gcd(a, m) == 1 : Meaning, they must not be factors, multiples of each other
+/// 
+/// The greatest common divisor of the 2 numbers must be 1 for the inverse to exist
 fn inverse_eea(a: i128, m: i128) -> Result<i128, &'static str> {
     let (mut t, mut new_t) = (0, 1);
     let (mut r, mut new_r) = (m, a);
@@ -47,18 +34,7 @@ fn inverse_eea(a: i128, m: i128) -> Result<i128, &'static str> {
     Ok(t)
 }
 
-fn entry_point() {
-    // Scenario 1: Prime Modulus (e.g., p = 17)
-    // We want inverse of 3 mod 17.
-    // FLT approach: 3^(17-2) = 3^15 mod 17
-    let p = 17;
-    let a = 3;
-    
-    match inverse_fermat(a, p) {
-        Ok(inv) => println!("FLT: Inverse of {} mod {} is {}", a, p, inv),
-        Err(e) => println!("FLT Error: {}", e),
-    }
-
+pub fn entry_point() {
     // Scenario 2: Composite Modulus (e.g., m = 20)
     // We want inverse of 3 mod 20.
     // FLT would FAIL here because 20 is not prime.

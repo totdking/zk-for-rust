@@ -19,6 +19,8 @@ impl FieldElement {
         Self { value: v }
     }
 
+    /// Fermat's Little Theorem Inverse
+    /// RESTRICTION: Modulus `p` MUST be Prime.
     pub fn inverse(&self) -> Self {
         if self.value == 0 {
             panic!("Cannot invert 0");

@@ -114,12 +114,12 @@ pub fn entry_point() {
     
     assert_eq!(secret.0, 12);
     println!("integrity check passed: Secret is 12 \n");
-    let ai_div = FieldElement::new(4);
-    let ai_inv = ai_div.inverse();
-    println!("the inverse of {:?} is {:?}", ai_div, ai_inv);
+    // let ai_div = FieldElement::new(4);
+    // let ai_inv = ai_div.inverse();
+    // println!("the inverse of {:?} is {:?}", ai_div, ai_inv);
 
-    let own_div = ai_div.eea_inv();
-    println!("the inverse of {:?} is {:?}", ai_div, own_div);
+    // let own_div = ai_div.eea_inv();
+    // println!("the inverse of {:?} is {:?}", ai_div, own_div);
 
 }
 

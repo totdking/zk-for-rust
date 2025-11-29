@@ -1,7 +1,7 @@
-mod dkg_fiat_shamir;
-use dkg_fiat_shamir::lagrange_interpolation;
+mod flt_eea;
+use flt_eea::*;
 
 fn main() {
-    println!("Run 'cargo test' to test your EC implementation!");
-    lagrange_interpolation::entry_point();
+    extended_euclidean_algo::entry_point();
+    fermat_little_theorem::entry_point();
 }

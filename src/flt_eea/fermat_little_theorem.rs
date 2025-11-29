@@ -1,5 +1,5 @@
-// Standard "BigInt" style arithmetic for demonstration.
-// In production, use `crypto-bigint` or `num-bigint`.
+//! Standard "BigInt" style arithmetic for demonstration.
+//! In production, use `crypto-bigint` or `num-bigint`.
 
 fn mod_pow(mut base: i128, mut exp: i128, modulus: i128) -> i128 {
     if modulus == 1 { return 0; }
@@ -9,6 +9,7 @@ fn mod_pow(mut base: i128, mut exp: i128, modulus: i128) -> i128 {
         if exp % 2 == 1 {
             result = (result * base) % modulus;
         }
+        // exp = exp / 2
         exp = exp >> 1;
         base = (base * base) % modulus;
     }
@@ -30,7 +31,7 @@ fn inverse_fermat(a: i128, p: i128) -> Result<i128, &'static str> {
 }
 
 
-fn entry_point() {
+pub fn entry_point() {
     // Scenario 1: Prime Modulus (e.g., p = 17)
     // We want inverse of 3 mod 17.
     // FLT approach: 3^(17-2) = 3^15 mod 17
@@ -41,19 +42,4 @@ fn entry_point() {
         Ok(inv) => println!("FLT: Inverse of {} mod {} is {}", a, p, inv),
         Err(e) => println!("FLT Error: {}", e),
     }
-
-    // Scenario 2: Composite Modulus (e.g., m = 20)
-    // We want inverse of 3 mod 20.
-    // FLT would FAIL here because 20 is not prime.
-    // EEA works because gcd(3, 20) = 1.
-    let m = 20;
-    let b = 3;
-    
-    match inverse_eea(b, m) {
-        Ok(inv) => println!("EEA: Inverse of {} mod {} is {}", b, m, inv),
-        Err(e) => println!("EEA Error: {}", e),
-    }
-    
-    // Verification
-    // 3 * 7 = 21 == 1 mod 20. Correct.
 }
