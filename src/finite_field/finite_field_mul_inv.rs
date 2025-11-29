@@ -30,10 +30,8 @@ pub fn eea_inv(num: u128, p: u128) -> u128{
     }
 
     // Use i64 to handle potential -ve numbers during calculation
-    let mut t = 0_i128;
-    let mut new_t = 1_i128;
-    let mut r = p as i128;
-    let mut new_r = num as i128;
+    let (mut t , mut new_t) = (0, 1);
+    let (mut r, mut new_r) = (p, num);
 
     // loop runs untli the remainder (new_r) is 0
     while new_r != 0 {
@@ -84,6 +82,11 @@ pub fn eea_inv2(num: u32, p: u32) -> u32{
     if num > p - 1 {
         panic!("The number: {:?} is not a member of valid fields in the finite field: {:?} ", num, p);
     }
+
+    if num % p == 0 {
+        panic!("{:?} has no multiplicative inverse in the finite field: {:?} ", num, p);
+    }
+
     let mut target = 0;
     loop {
         let mul = num * target ;

@@ -57,8 +57,6 @@ impl Mul for FieldElement {
     }
 }
 
-mod finite_field_element;
-use finite_field_element::*;
 fn main() {
     let a = FieldElement::new(15);
     let b = FieldElement::new(4);
