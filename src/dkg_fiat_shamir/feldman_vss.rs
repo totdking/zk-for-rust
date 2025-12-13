@@ -35,8 +35,8 @@ impl GroupElement {
     
     /// Scalar Multiplication (g^a)^b = g^{ab}
     fn scalar_mul(&self, scalar: u128) -> Self {
-        let mut base = self.0;
         let mut exp = scalar;
+        let mut base = self.0;
         let mut res = 1u128;
         while exp > 0 {
             if exp % 2 == 1 { res = (res * base) % MODULUS; }

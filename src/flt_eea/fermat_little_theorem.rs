@@ -19,6 +19,11 @@ fn mod_pow(mut base: i128, mut exp: i128, modulus: i128) -> i128 {
 /// 1. Fermat's Little Theorem Inverse
 /// RESTRICTION: Modulus `p` MUST be Prime.
 fn inverse_fermat(a: i128, p: i128) -> Result<i128, &'static str> {
+    if a != 1 {
+        if p % a == 0 {
+            return Err("Cannot pass in a factor of the prime modulus field");
+        }
+    }
     if a <= 0 || a >= p {
         // In a real field, we strictly normalize inputs.
         return Err("Input must be in range [1, p-1]");
@@ -36,7 +41,7 @@ pub fn entry_point() {
     // We want inverse of 3 mod 17.
     // FLT approach: 3^(17-2) = 3^15 mod 17
     let p = 17;
-    let a = 3;
+    let a = 5;
     
     match inverse_fermat(a, p) {
         Ok(inv) => println!("FLT: Inverse of {} mod {} is {}", a, p, inv),

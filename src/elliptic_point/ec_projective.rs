@@ -124,6 +124,9 @@ impl From<ProjectivePoint> for AffinePoint {
     fn from(p: ProjectivePoint) -> Self {
         // TODO: Implement conversion from Projective to Affine
         // Hint: You need to find the inverse of Z
+        if p.is_infinity() {
+            return sAffinePoint::Infinity;
+        }
         let z_inv = p.z.inverse();
         let x = p.x * z_inv;
         let y = p.y * z_inv;
@@ -171,7 +174,7 @@ impl ProjectivePoint {
     /// If P is infinity, return Q
     /// If Q is infinity, return P
     /// If P == Q, return double(P)
-    /// Otherwise use the addition formula for projective coordinates.
+    /// Otherwise use the addition formula for Normal projective coordinates.
     pub fn add(&self, other: &Self) -> Self {
         // TODO: Implement point addition in projective coordinates
         if self.is_infinity() {
