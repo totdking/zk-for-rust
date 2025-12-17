@@ -1,6 +1,14 @@
 //! Standard "BigInt" style arithmetic for demonstration.
 //! In production, use `crypto-bigint` or `num-bigint`.
 
+/// To find the mod of a number raised to a power in a finite field
+/// 
+/// Properties
+/// a^(p-1) = 1 mod p
+/// 
+/// a^(p-2) = a^(-1) mod p
+/// 
+/// a^p = a mod p
 fn mod_pow(mut base: i128, mut exp: i128, modulus: i128) -> i128 {
     if modulus == 1 { return 0; }
     let mut result = 1;
